@@ -31,8 +31,9 @@ public class QueueManager : MonoBehaviour
     void AddClientToQueue(GameObject go, Transform spot)
     {
         clientOnSpots.Add(go);
-        go.GetComponentInChildren<ClientQueueBehaviour>().MoveTowardsSpot(spot);
-        go.GetComponentInChildren<ClientQueueBehaviour>().LeavingQueue(exitSocket);
+        ClientQueueBehaviour currentClientBehaviour = go.GetComponentInChildren<ClientQueueBehaviour>();
+        currentClientBehaviour.MoveTowardsSpot(spot);
+        currentClientBehaviour.LeavingQueue(exitSocket);
     }
 
     public void RemoveClient(GameObject go)
@@ -71,5 +72,10 @@ public class QueueManager : MonoBehaviour
 
         }
 
+    }
+
+    public List<GameObject> GetQueueSpot()
+    {
+        return queueSpots;
     }
 }

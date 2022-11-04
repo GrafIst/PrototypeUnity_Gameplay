@@ -7,11 +7,14 @@ public class ClientQueueBehaviour : MonoBehaviour
     [SerializeField] ClientsMovement cm;
     [SerializeField] Transform queueSpot;
 
+    QueueManager qm;
+
     // Start is called before the first frame update
     void Start()
     {
         cm = GetComponentInChildren<ClientsMovement>();
         cm.SetClientQueueBehaviour(this);
+        
     }
 
     // Update is called once per frame
@@ -32,12 +35,17 @@ public class ClientQueueBehaviour : MonoBehaviour
 
     public void MakeFirst()
     {
-        cm.hasPriority = true;
+        cm.activeState = ClientsMovement.clientState.Buying;
     }
 
     public void AskIfFreeSpot()
     {
 
+    }
+
+    void SetQueueManager(QueueManager _qm)
+    {
+        qm = _qm:
     }
 
 

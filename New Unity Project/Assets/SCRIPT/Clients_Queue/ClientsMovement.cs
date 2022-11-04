@@ -12,7 +12,7 @@ public class ClientsMovement : MonoBehaviour
 
     float timeClientWaiting;
 
-    public bool hasPriority;
+    //public bool hasPriority;
 
     public enum clientState { Walk, MoveTowards, Queuing, Buying, LeavingQueue}
 
@@ -60,7 +60,6 @@ public class ClientsMovement : MonoBehaviour
                 Leaving();
                 break;
         }
-        
     }
 
     void MoveTowards()
@@ -72,16 +71,14 @@ public class ClientsMovement : MonoBehaviour
         if(distPosTOTarget <= 1f)
         {
             an.SetBool("isBusy", true);
-            activeState = !hasPriority ? clientState.Queuing : clientState.Buying;
+
+           // activeState = !hasPriority ? clientState.Queuing : clientState.Buying;
         }
     }
 
     public void SetTarget(Transform target)
     {
-        //if(spotTarget != target)
-        //{
-
-        //}
+        
         activeState = ClientsMovement.clientState.MoveTowards;
         spotTarget = target;
     }
