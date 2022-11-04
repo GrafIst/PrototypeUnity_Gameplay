@@ -46,7 +46,6 @@ public class ClientsMovement : MonoBehaviour
             case clientState.Queuing:
                 WaitForFreeSpot();
                 //Waiting in line
-
                 break;
 
             case clientState.Buying:

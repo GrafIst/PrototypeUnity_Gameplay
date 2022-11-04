@@ -32,6 +32,7 @@ public class QueueManager : MonoBehaviour
     {
         clientOnSpots.Add(go);
         ClientQueueBehaviour currentClientBehaviour = go.GetComponentInChildren<ClientQueueBehaviour>();
+        currentClientBehaviour.
         currentClientBehaviour.MoveTowardsSpot(spot);
         currentClientBehaviour.LeavingQueue(exitSocket);
     }
