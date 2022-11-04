@@ -143,6 +143,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clientSpeed: 0
+  maxTimeClientWaiting: 15
+  spotTarget: {fileID: 0}
+  exitTarget: {fileID: 0}
+  an: {fileID: 2134029973745126061}
+  activeState: 0
 --- !u!1 &2134029973435753632
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,6 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2559084cfebe944bdd513119b4ba03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cm: {fileID: 0}
+  queueSpot: {fileID: 0}
 --- !u!1 &2134029973745126063
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ public class ClientsSpawner : MonoBehaviour
     [SerializeField] GameObject client;
     [SerializeField] Transform spawnerSocket;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {

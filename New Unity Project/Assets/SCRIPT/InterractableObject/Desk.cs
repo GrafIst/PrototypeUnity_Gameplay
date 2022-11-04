@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClientsDestroyer : MonoBehaviour
+public class Desk : MonoBehaviour, IInterract
 {
-
     [SerializeField] QueueManager qm;
+
+    public void Interract()
+    {
+        if(qm.clientOnSpots.Count > 0) //making sure there is a client
+        {
+            Debug.Log("I interract with client");
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -17,14 +24,5 @@ public class ClientsDestroyer : MonoBehaviour
     void Update()
     {
         
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Client"))
-        {
-            qm.RemoveClient(other.transform.root.gameObject);
-            Destroy(other.transform.root.gameObject, 0.1f);
-        }
     }
 }

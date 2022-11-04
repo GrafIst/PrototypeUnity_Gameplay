@@ -5,12 +5,13 @@ using UnityEngine;
 public class ClientQueueBehaviour : MonoBehaviour
 {
     [SerializeField] ClientsMovement cm;
-
+    [SerializeField] Transform queueSpot;
 
     // Start is called before the first frame update
     void Start()
     {
         cm = GetComponentInChildren<ClientsMovement>();
+        cm.SetClientQueueBehaviour(this);
     }
 
     // Update is called once per frame
@@ -19,8 +20,26 @@ public class ClientQueueBehaviour : MonoBehaviour
         
     }
 
-    void MoveTowardsSpot()
+    public void MoveTowardsSpot(Transform spot)
     {
-        cm.activeState = ClientsMovement.clientState.MoveTowards;
+        cm.SetTarget(spot);
     }
+
+    public void LeavingQueue(Transform exitSpot)
+    {
+        cm.SetExitTarget(exitSpot);
+    }
+
+    public void MakeFirst()
+    {
+        cm.hasPriority = true;
+    }
+
+    public void AskIfFreeSpot()
+    {
+
+    }
+
+
+    //TODO MAKE CLIENT MOVEFORWARD IN QUEUE, FREE LAST SPOT ON QUEUE,
 }

@@ -6,7 +6,11 @@ public class QueueManager : MonoBehaviour
 {
 
     [SerializeField] List<GameObject> queueSpots;
+    public List<GameObject> clientOnSpots;
 
+    public Transform exitSocket;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,14 +23,24 @@ public class QueueManager : MonoBehaviour
         
     }
 
-    void AddClientToQueue(GameObject go)
+    //void DetectDeadClientEmptyQueue()
+    //{
+        
+    //}
+
+    void AddClientToQueue(GameObject go, Transform spot)
     {
-        queueSpots.Add(go);
+        clientOnSpots.Add(go);
+        go.GetComponentInChildren<ClientQueueBehaviour>().MoveTowardsSpot(spot);
+        go.GetComponentInChildren<ClientQueueBehaviour>().LeavingQueue(exitSocket);
     }
 
-    void RemoveClient()
+    public void RemoveClient(GameObject go)
     {
-        queueSpots.RemoveAt(0);
+        //Make all queueing png move forward one spot,
+        queueSpots[0].tag = "Untagged";
+        queueSpots[0].tag = "FreeSpot";
+        clientOnSpots.Remove(go);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,9 +54,15 @@ public class QueueManager : MonoBehaviour
                 {
                     //Found a free spot !
 
-                    AddClientToQueue(other.transform.root.gameObject);
+                    AddClientToQueue(other.transform.root.gameObject, spot.transform);
                     spot.tag = "Untagged";
                     spot.tag = "OccupiedSpot";
+
+                    if(queueSpots.IndexOf(spot) == 0)
+                    {
+                        //first client
+                        other.transform.root.gameObject.GetComponentInChildren<ClientQueueBehaviour>().MakeFirst();
+                    }
                     return;
                 }
             }
