@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ClientsMovement : MonoBehaviour
 {
@@ -12,13 +13,17 @@ public class ClientsMovement : MonoBehaviour
 
     float timeClientWaiting;
 
+    bool isFirst = false;
+
     //public bool hasPriority;
 
     public enum clientState { Walk, MoveTowards, Queuing, Buying, LeavingQueue}
 
     public clientState activeState = clientState.Walk;
 
-    ClientQueueBehaviour cqb;
+    QueueManager qm;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +35,6 @@ public class ClientsMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         switch (activeState)
         {
             case clientState.Walk:
@@ -44,7 +48,6 @@ public class ClientsMovement : MonoBehaviour
                 break;
 
             case clientState.Queuing:
-                WaitForFreeSpot();
                 //Waiting in line
                 break;
 
@@ -55,7 +58,7 @@ public class ClientsMovement : MonoBehaviour
                 break;
 
             case clientState.LeavingQueue:
-                Debug.Log("Too slow, i'm leaving");
+                //Debug.Log("Too slow, i'm leaving");
                 Leaving();
                 break;
         }
@@ -69,23 +72,11 @@ public class ClientsMovement : MonoBehaviour
         float distPosTOTarget = posToTarget.magnitude;
         if(distPosTOTarget <= 1f)
         {
-            an.SetBool("isBusy", true);
-
-           // activeState = !hasPriority ? clientState.Queuing : clientState.Buying;
+           an.SetBool("isBusy", true);
+           activeState = !isFirst ? clientState.Queuing : clientState.Buying;
         }
     }
 
-    public void SetTarget(Transform target)
-    {
-        
-        activeState = ClientsMovement.clientState.MoveTowards;
-        spotTarget = target;
-    }
-
-    public void SetExitTarget(Transform target)
-    {
-        exitTarget = target;
-    }
 
     public void LookTowards()
     {
@@ -94,6 +85,7 @@ public class ClientsMovement : MonoBehaviour
 
     public void Leaving()
     {
+
         an.SetBool("isBusy", false);
         Vector3 posToExit = exitTarget.position - transform.position;
         transform.position += new Vector3(posToExit.x, 0, posToExit.z).normalized * clientSpeed * Time.deltaTime;
@@ -101,6 +93,7 @@ public class ClientsMovement : MonoBehaviour
         if (distPosTOTarget <= 1f)
         {
             activeState = clientState.Walk;
+            qm.RemoveClient(this.transform.root.gameObject);
         }
     }
 
@@ -114,13 +107,17 @@ public class ClientsMovement : MonoBehaviour
         }
     }
 
-    void WaitForFreeSpot()
+    public void SetupQueuePosition(Transform targetSpot, int indexSpot, Transform exitSpot, QueueManager _qm)
     {
+        qm = _qm;
+        if (indexSpot == 0)
+        {
+            isFirst = true;
+            //Debug.Log("Im first !");
+        }
 
-    }
-
-    public void SetClientQueueBehaviour(ClientQueueBehaviour _cqb)
-    {
-        cqb = _cqb;
+        spotTarget = targetSpot;
+        exitTarget = exitSpot;
+        activeState = clientState.MoveTowards;
     }
 }

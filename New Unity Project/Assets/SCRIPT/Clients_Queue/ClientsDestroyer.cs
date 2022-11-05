@@ -23,7 +23,7 @@ public class ClientsDestroyer : MonoBehaviour
     {
         if (other.CompareTag("Client"))
         {
-            qm.RemoveClient(other.transform.root.gameObject);
+            //qm.RemoveClient(other.transform.root.gameObject);
             Destroy(other.transform.root.gameObject, 0.1f);
         }
     }
