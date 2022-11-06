@@ -52,7 +52,7 @@ public class ClientsMovement : MonoBehaviour
     void Start()
     {
         clientSpeed = Random.Range(3, 10);
-        maxTimeClientWaiting = Random.Range(100, 300);
+        maxTimeClientWaiting = Random.Range(70,120);
         timeClientWaiting = maxTimeClientWaiting;
     }
 
