@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Interractable
+  - FreeSpot
+  - Client
+  - Throwable
+  - OccupiedSot
+  - IddleSpot
   layers:
   - Default
   - TransparentFX
