@@ -8,8 +8,8 @@ TagManager:
   - FreeSpot
   - Client
   - Throwable
-  - OccupiedSot
   - IddleSpot
+  - OccupiedSpot
   layers:
   - Default
   - TransparentFX

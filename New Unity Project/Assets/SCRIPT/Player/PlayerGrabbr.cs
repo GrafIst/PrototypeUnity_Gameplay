@@ -32,8 +32,6 @@ public class PlayerGrabbr : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && grabbedObject == null)
         {
-            
-            //Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
             List<Collider> hitColliders = Physics.OverlapSphere(transform.position, 1).ToList();
             Collider interactable = hitColliders.Find(c => c.CompareTag("Throwable"));
             if (interactable)
@@ -42,14 +40,6 @@ public class PlayerGrabbr : MonoBehaviour
                 grabbedObject = interactable.GetComponent<IThrowable>().Grab();
                 GrabItem();
             }
-            //if (hitColliders[0].CompareTag("Throwable"))
-            //{
-                
-            //    //hitColliders[0].transform.parent = playerHandSocket.transform;
-            //    grabbedItemSocket = hitColliders[0].GetComponent<IThrowable>().GetGrabSocket();
-            //    grabbedObject = hitColliders[0].GetComponent<IThrowable>().Grab();
-            //    GrabItem();
-            //}
         }
 
         
@@ -62,6 +52,7 @@ public class PlayerGrabbr : MonoBehaviour
         grabbedRb.useGravity = false;
         grabbedObject.transform.parent = playerHandSocket.transform;
         grabbedObject.transform.position = playerHandSocket.position;
+        grabbedObject.transform.eulerAngles = new Vector3(0, 180, 0);
     }
 
     void ThrowItem()
