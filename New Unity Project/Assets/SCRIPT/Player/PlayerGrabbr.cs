@@ -9,8 +9,6 @@ public class PlayerGrabbr : MonoBehaviour
     [SerializeField] float throwStrenght;
     [SerializeField] Transform playerHandSocket;
 
-    Transform grabbedItemSocket;
-
     Animator an;
 
     private void Awake()
@@ -37,17 +35,14 @@ public class PlayerGrabbr : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && grabbedObject == null)
         {
             List<Collider> hitColliders = Physics.OverlapSphere(transform.position, 1).ToList();
-            Collider interactable = hitColliders.Find(c => c.CompareTag("Throwable"));
+            Collider interactable = hitColliders.Find(c => c.GetComponentInChildren<MakeThrowable>());
             if (interactable)
             {
                 an.SetBool("isHolding", true);
-                grabbedItemSocket = interactable.GetComponent<IThrowable>().GetGrabSocket();
                 grabbedObject = interactable.GetComponent<IThrowable>().Grab();
                 GrabItem();
             }
         }
-
-        
     }
 
     void GrabItem()
@@ -86,8 +81,18 @@ public class PlayerGrabbr : MonoBehaviour
     public void GrabFromRessource(GameObject go)
     {
         an.SetBool("isHolding", true);
-        grabbedItemSocket = go.GetComponent<IThrowable>().GetGrabSocket();
         grabbedObject = go;
         GrabItem();
+    }
+
+    public GameObject GetGrabbedItem()
+    {
+        return grabbedObject;
+    }
+
+    public void RemoveGrabbedItem()
+    {
+        an.SetBool("isHolding", false);
+        Destroy(grabbedObject);
     }
 }

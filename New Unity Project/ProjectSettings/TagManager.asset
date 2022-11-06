@@ -10,6 +10,13 @@ TagManager:
   - Throwable
   - IddleSpot
   - OccupiedSpot
+  - Canvas
+  - Ingot
+  - Leather
+  - SwordBlade
+  - SwordFull
+  - ArmorPlate
+  - ArmorFull
   layers:
   - Default
   - TransparentFX

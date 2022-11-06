@@ -30,6 +30,8 @@ public class ClientsMovement : MonoBehaviour
 
     public List<GameObject> skin;
 
+    public bool wantSword;
+
     private void Awake()
     {
         int selectedSkin = Random.Range(0, 3);
@@ -40,6 +42,8 @@ public class ClientsMovement : MonoBehaviour
                 skin[i].SetActive(false);
             }
         }
+
+        wantSword = Random.Range(1, 3)%2 == 0;
 
     }
 
