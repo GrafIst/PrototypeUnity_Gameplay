@@ -7,14 +7,18 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float speed, dashStrenght;
     Rigidbody rb;
+    Animator an;
+
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>(); 
+        rb = GetComponent<Rigidbody>();
+        an = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        an.SetBool("isWalking", false);
         HandleInput();   
     }
 
@@ -23,24 +27,28 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
+            an.SetBool("isWalking", true);
             transform.position += (Vector3.right * speed * Time.deltaTime);
             float rotation = Vector3.Angle(transform.forward, Vector3.right);
             transform.Rotate(0, rotation, 0);
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
+            an.SetBool("isWalking", true);
             transform.position += (Vector3.forward * speed * Time.deltaTime);
             float rotation = Vector3.Angle(transform.forward, Vector3.forward);
             transform.Rotate(0, rotation, 0);
         }
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
+            an.SetBool("isWalking", true);
             transform.position += (Vector3.left * speed * Time.deltaTime);
             float rotation = Vector3.Angle(transform.forward, Vector3.left);
             transform.Rotate(0, rotation, 0);
         }
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
+            an.SetBool("isWalking", true);
             transform.position += (Vector3.back * speed * Time.deltaTime);
             float rotation = Vector3.Angle(transform.forward, Vector3.back);
             transform.Rotate(0, rotation, 0);
@@ -56,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            an.SetTrigger("Dash");
             rb.AddForce(transform.forward * dashStrenght, ForceMode.Impulse);
         }
 

@@ -11,10 +11,11 @@ public class PlayerGrabbr : MonoBehaviour
 
     Transform grabbedItemSocket;
 
-    // Start is called before the first frame update
-    void Start()
+    Animator an;
+
+    private void Awake()
     {
-        
+        an = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -27,7 +28,10 @@ public class PlayerGrabbr : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && grabbedObject != null)
         {
+           
+            an.SetBool("isHolding", false);
             ThrowItem();
+            
         }
 
         if (Input.GetKeyDown(KeyCode.E) && grabbedObject == null)
@@ -36,6 +40,7 @@ public class PlayerGrabbr : MonoBehaviour
             Collider interactable = hitColliders.Find(c => c.CompareTag("Throwable"));
             if (interactable)
             {
+                an.SetBool("isHolding", true);
                 grabbedItemSocket = interactable.GetComponent<IThrowable>().GetGrabSocket();
                 grabbedObject = interactable.GetComponent<IThrowable>().Grab();
                 GrabItem();

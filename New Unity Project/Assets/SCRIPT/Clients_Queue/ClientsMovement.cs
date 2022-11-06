@@ -11,7 +11,7 @@ public class ClientsMovement : MonoBehaviour
 
     [SerializeField] Animator an;
 
-    float timeClientWaiting;
+    public float timeClientWaiting;
 
     bool isFirst = false;
 
@@ -23,12 +23,27 @@ public class ClientsMovement : MonoBehaviour
 
     QueueManager qm;
 
+    public List<GameObject> skin;
+
+    private void Awake()
+    {
+        int selectedSkin = Random.Range(0, 3);
+        for(int i = 0; i < skin.Count; i++)
+        {
+            if (selectedSkin != i)
+            {
+                skin[i].SetActive(false);
+            }
+        }
+
+    }
 
 
     // Start is called before the first frame update
     void Start()
     {
         clientSpeed = Random.Range(3, 10);
+        maxTimeClientWaiting = Random.Range(100, 300);
         timeClientWaiting = maxTimeClientWaiting;
     }
 
@@ -39,7 +54,7 @@ public class ClientsMovement : MonoBehaviour
         {
             case clientState.Walk:
                 //Debug.Log("Client is walking");
-                transform.position += transform.right * clientSpeed * Time.deltaTime;
+                transform.position += -transform.up * clientSpeed * Time.deltaTime;
                 break;
 
             case clientState.MoveTowards:
@@ -66,13 +81,13 @@ public class ClientsMovement : MonoBehaviour
 
     void MoveTowards()
     {
-        an.SetBool("isBusy", false);
+        //an.SetBool("isBusy", false);
         Vector3 posToTarget = spotTarget.position - transform.position;
         transform.position += new Vector3(posToTarget.x, 0, posToTarget.z).normalized * clientSpeed * Time.deltaTime;
         float distPosTOTarget = posToTarget.magnitude;
         if(distPosTOTarget <= 1f)
         {
-           an.SetBool("isBusy", true);
+           //an.SetBool("isBusy", true);
            activeState = !isFirst ? clientState.Queuing : clientState.Buying;
         }
     }
@@ -86,12 +101,13 @@ public class ClientsMovement : MonoBehaviour
 
     public void Leaving()
     {
-
-        an.SetBool("isBusy", false);
+        //Debug.Log("im leaving");
+        //an.SetBool("isBusy", false);
         Vector3 posToExit = exitTarget.position - transform.position;
         transform.position += new Vector3(posToExit.x, 0, posToExit.z).normalized * clientSpeed * Time.deltaTime;
         float distPosTOTarget = posToExit.magnitude;
-        if (distPosTOTarget <= 1f)
+        //Debug.Log(distPosTOTarget);
+        if (distPosTOTarget <= 2f)
         {
             activeState = clientState.Walk;
             qm.RemoveClient(this.transform.root.gameObject);

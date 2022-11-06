@@ -31,6 +31,7 @@ public class ClientsSpawner : MonoBehaviour
 
     void SpawnClient()
     {
-        Instantiate(client, spawnerSocket.position, Quaternion.identity);
+        GameObject clientPrefab = Instantiate(client, spawnerSocket.position, Quaternion.identity);
+        clientPrefab.transform.eulerAngles = new Vector3(-90, 0, 90);
     }
 }
