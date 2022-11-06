@@ -6,24 +6,6 @@ using static Oven;
 
 public class Anvil : MonoBehaviour, IInterract
 {
-    //SphereCollider sc;
-
-    private void Awake()
-    {
-        //sc = GetComponent<SphereCollider>();    
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Interract()
     {
@@ -40,7 +22,7 @@ public class Anvil : MonoBehaviour, IInterract
                 {
                     playr.RemoveGrabbedItem();
                     GameObject item = playr.GetGrabbedItem().GetComponent<IHammer>().Hammered();
-                    Instantiate(item, player.transform.position + new Vector3(0,5,0), Quaternion.identity);
+                    Instantiate(item, player.transform.position + new Vector3(0,1,0), Quaternion.identity);
                 }
             }
             
