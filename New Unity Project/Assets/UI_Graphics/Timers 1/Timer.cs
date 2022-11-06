@@ -25,10 +25,11 @@ public class Timer : MonoBehaviour {
    private UnityAction<bool> onTimerPauseAction ;
 
    private void Awake () {
-      ResetTimer () ;
+        uiText = GetComponentInChildren<TMP_Text>();
+        ResetTimer () ;
    }
 
-   private void ResetTimer () {
+   public void ResetTimer () {
       uiText.text = "00:00" ;
       uiFillImage.fillAmount = 0f ;
 

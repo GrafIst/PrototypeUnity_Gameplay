@@ -82,4 +82,12 @@ public class PlayerGrabbr : MonoBehaviour
     {
         grabbedObject = null;
     }
+
+    public void GrabFromRessource(GameObject go)
+    {
+        an.SetBool("isHolding", true);
+        grabbedItemSocket = go.GetComponent<IThrowable>().GetGrabSocket();
+        grabbedObject = go;
+        GrabItem();
+    }
 }

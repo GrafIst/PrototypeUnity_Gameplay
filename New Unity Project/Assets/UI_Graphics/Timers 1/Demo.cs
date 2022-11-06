@@ -9,26 +9,9 @@ public class Demo : MonoBehaviour {
 
 
     private void Start () {
-      timer1
-      .SetDuration (300)
-      .OnEnd (() => Debug.Log ("Timer 1 ended"))
-      .Begin () ;
-
-   //     timer2
-   //  .SetDuration(6)
-   //  .OnEnd(() => Debug.Log("Timer 2 ended"))
-   //  .Begin();
-
-   //     timer3
-   //.SetDuration(60)
-   //.OnEnd(() => Debug.Log("Timer 3 ended"))
-   //.Begin();
-
-   //     timer4
-   //.SetDuration(60)
-   //.OnEnd(() => Debug.Log("Timer 4 ended"))
-   //.Begin();
-
+      timer1.SetDuration(20).OnEnd (() => Debug.Log ("Timer 1 ended")).Begin () ;
+     
     }
+
 
 }

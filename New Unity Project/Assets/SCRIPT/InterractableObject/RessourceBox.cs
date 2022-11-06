@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RessourceBox : MonoBehaviour, IInterract
@@ -7,6 +8,9 @@ public class RessourceBox : MonoBehaviour, IInterract
     public enum item { Leather, Ingot }
 
     public item itemProvided;
+
+    public GameObject prefabItem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,5 +26,16 @@ public class RessourceBox : MonoBehaviour, IInterract
     public void Interract()
     {
         Debug.Log("Ressourcebox is interracted");
+
+        
+
+        List<Collider> hitColliders = Physics.OverlapSphere(transform.position, 1).ToList();
+        Collider player = hitColliders.Find(c => c.CompareTag("Player"));
+        if (player)
+        {
+            Instantiate(prefabItem, player.transform.position, Quaternion.identity);
+            //player.GetComponentInChildren<PlayerGrabbr>().GrabFromRessource(prefabItem);
+        }
+
     }
 }

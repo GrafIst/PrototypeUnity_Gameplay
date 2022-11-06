@@ -14,8 +14,13 @@ public class ClientsMovement : MonoBehaviour
     public float timeClientWaiting;
 
     bool isFirst = false;
+    bool buyingTrigger;
 
     //public bool hasPriority;
+
+    public GameObject timer;
+    public GameObject canvas;
+    GameObject timerPrefab;
 
     public enum clientState { Walk, MoveTowards, Queuing, Buying, LeavingQueue}
 
@@ -118,6 +123,12 @@ public class ClientsMovement : MonoBehaviour
     {
         timeClientWaiting -= Time.deltaTime;
 
+        if (!buyingTrigger)
+        {
+            CreateTimer();
+            buyingTrigger = true;
+        }
+
         if(timeClientWaiting <= 0)
         {
             activeState = clientState.LeavingQueue;
@@ -136,5 +147,19 @@ public class ClientsMovement : MonoBehaviour
         spotTarget = targetSpot;
         exitTarget = exitSpot;
         activeState = clientState.MoveTowards;
+    }
+
+    void CreateTimer()
+    {
+        timerPrefab = Instantiate(timer, new Vector3(-420, 200, 0), Quaternion.identity);
+        timerPrefab.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+        timerPrefab.GetComponentInChildren<Timer>().SetDuration((int)timeClientWaiting).OnEnd(() => Debug.Log("Timer ended")).Begin();
+        Invoke("RemoveTimer", timeClientWaiting);
+    }
+
+
+    void RemoveTimer()
+    {
+        Destroy(timerPrefab);
     }
 }

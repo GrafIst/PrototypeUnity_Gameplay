@@ -54,6 +54,9 @@ MonoBehaviour:
   spotTarget: {fileID: 0}
   exitTarget: {fileID: 0}
   an: {fileID: 2901883940283826249}
+  timeClientWaiting: 0
+  timer: {fileID: 1037121642091944, guid: b851a1fc7367d564683cc885616bf470, type: 3}
+  canvas: {fileID: 0}
   activeState: 0
   skin:
   - {fileID: 7102188100054648459}
