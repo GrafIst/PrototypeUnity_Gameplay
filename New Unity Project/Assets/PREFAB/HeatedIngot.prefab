@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4875463638919015264}
   m_Layer: 0
   m_Name: HeatedIngot
-  m_TagString: Ingot
+  m_TagString: HeatedIngot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -131,7 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b186823650230440a020c592bc0ac78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  socket: {fileID: 0}
 --- !u!135 &4734507302330741112
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -157,3 +156,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a0761ece9c8fa40a59d2eae9757ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  betterObject: {fileID: 8814933370140251318, guid: e7635166b298f684d8d450a5a88f62ad, type: 3}

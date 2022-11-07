@@ -18,7 +18,7 @@ public class ClientsMovement : MonoBehaviour
 
     //public bool hasPriority;
 
-    public GameObject timer;
+    public GameObject timerSword, timerArmor;
     public GameObject canvas;
     GameObject timerPrefab;
 
@@ -30,7 +30,7 @@ public class ClientsMovement : MonoBehaviour
 
     public List<GameObject> skin;
 
-    public bool wantSword;
+    public bool wantSword, clientIsSatisfied;
 
     private void Awake()
     {
@@ -133,8 +133,9 @@ public class ClientsMovement : MonoBehaviour
             buyingTrigger = true;
         }
 
-        if(timeClientWaiting <= 0)
+        if (clientIsSatisfied || timeClientWaiting <= 0)
         {
+            RemoveTimer();
             activeState = clientState.LeavingQueue;
         }
     }
@@ -155,15 +156,32 @@ public class ClientsMovement : MonoBehaviour
 
     void CreateTimer()
     {
-        timerPrefab = Instantiate(timer, new Vector3(-420, 200, 0), Quaternion.identity);
+        if (wantSword)
+        {
+            timerPrefab = Instantiate(timerSword, new Vector3(-420, 200, 0), Quaternion.identity);
+        }
+        else
+        {
+            timerPrefab = Instantiate(timerArmor, new Vector3(-420, 200, 0), Quaternion.identity);
+        }
+        
         timerPrefab.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
         timerPrefab.GetComponentInChildren<Timer>().SetDuration((int)timeClientWaiting).OnEnd(() => Debug.Log("Timer ended")).Begin();
-        Invoke("RemoveTimer", timeClientWaiting);
     }
 
 
     void RemoveTimer()
     {
         Destroy(timerPrefab);
+    }
+
+    public bool GetItemWanted()
+    {
+        return wantSword;
+    }
+
+    public void SetClientHappy()
+    {
+        clientIsSatisfied = true;
     }
 }

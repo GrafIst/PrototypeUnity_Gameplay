@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmorFullBehaviour : MonoBehaviour, IItem
+public class ArmorFullBehaviour : MonoBehaviour, IItem, ISharpPolish
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject betterObject;
 
-    // Update is called once per frame
-    void Update()
+    public GameObject GetUpgrade()
     {
-        
+        return betterObject;
     }
 }

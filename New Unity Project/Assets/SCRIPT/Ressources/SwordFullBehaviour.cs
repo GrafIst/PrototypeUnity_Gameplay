@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordFullBehaviour : MonoBehaviour, IItem
+public class SwordFullBehaviour : MonoBehaviour, IItem, ISharpPolish
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject betterObject;
+    public GameObject GetUpgrade()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return betterObject;
     }
 }

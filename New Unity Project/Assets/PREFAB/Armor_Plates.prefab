@@ -114,7 +114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b186823650230440a020c592bc0ac78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  socket: {fileID: 0}
 --- !u!135 &2132155386959414612
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -156,3 +155,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7090ac162576c4fa71fac9e33194db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heatedObject: {fileID: 7471887433851066258, guid: ca906c73fee8cce49b4b89999d678824, type: 3}

@@ -65,12 +65,18 @@ public class Oven : MonoBehaviour, IInterract
                 PlayerGrabbr playr = player.transform.root.GetComponentInChildren<PlayerGrabbr>();
                 if(playr.GetGrabbedItem() != null)
                 {
-                    if (playr.GetGrabbedItem().GetComponent<IHeat>() != null)
+                    if(playr.GetGrabbedItem().CompareTag("Ingot") 
+                        || playr.GetGrabbedItem().CompareTag("SwordBlade")
+                        || playr.GetGrabbedItem().CompareTag("ArmorPlate"))
                     {
-                        CreateTimer();
-                        playr.RemoveGrabbedItem();
-                        ovenObjectHold = playr.GetGrabbedItem().GetComponent<IHeat>().Heat();
-                        activeState = ovenState.Heating;
+                        if (playr.GetGrabbedItem().GetComponent<IHeat>() != null)
+                        {
+                            timerCook = maxTimerCook;
+                            CreateTimer();
+                            playr.RemoveGrabbedItem();
+                            ovenObjectHold = playr.GetGrabbedItem().GetComponent<IHeat>().Heat();
+                            activeState = ovenState.Heating;
+                        }
                     }
                 }
                 

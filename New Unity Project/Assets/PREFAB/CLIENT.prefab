@@ -55,13 +55,15 @@ MonoBehaviour:
   exitTarget: {fileID: 0}
   an: {fileID: 2901883940283826249}
   timeClientWaiting: 0
-  timer: {fileID: 1037121642091944, guid: b851a1fc7367d564683cc885616bf470, type: 3}
+  timerSword: {fileID: 5320483338138272559, guid: 495ba553dbf61494889f9b38a9cdfa44, type: 3}
+  timerArmor: {fileID: 8825579904384080001, guid: 2cfdfc2337f38a64c861e3ba9203db37, type: 3}
   canvas: {fileID: 0}
   activeState: 0
   skin:
   - {fileID: 7102188100054648459}
   - {fileID: 4535553242431559659}
   - {fileID: 3135334717853906825}
+  wantSword: 0
 --- !u!54 &4051510227516141081
 Rigidbody:
   m_ObjectHideFlags: 0

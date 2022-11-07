@@ -17,6 +17,11 @@ TagManager:
   - SwordFull
   - ArmorPlate
   - ArmorFull
+  - ProcessedSwordBlade
+  - HeatedIngot
+  - ProcessedArmorPlate
+  - PolishedArmorFull
+  - SharpenSwordFull
   layers:
   - Default
   - TransparentFX
